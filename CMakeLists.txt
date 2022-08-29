@@ -7,7 +7,13 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(PathVisualizer src/main.cpp)
+add_executable(PathVisualizer 
+src/main.cpp
+src/Grid.cpp
+src/Grid.hpp
+src/GridBox.cpp
+src/GridBox.hpp
+)
 target_link_libraries(PathVisualizer PRIVATE sfml-graphics)
 target_compile_features(PathVisualizer PRIVATE cxx_std_17)
 
