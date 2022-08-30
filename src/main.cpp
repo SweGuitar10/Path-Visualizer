@@ -6,7 +6,7 @@
 // Global variables
 const int width = 800;
 const int height = 600;
-const float blockSize = 40;
+const float blockSize = 20;
 
 int main()
 {
@@ -67,7 +67,7 @@ int main()
 						{
 							if (rect.getFillColor() == sf::Color::Green)
 							{
-								rect.setFillColor(sf::Color::Black);
+								rect.setFillColor(sf::Color::White);
 							}
 							else
 							{
