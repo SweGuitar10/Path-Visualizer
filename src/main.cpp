@@ -1,16 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "Grid.hpp"
+#include "GridBox.hpp"
 #include <iostream>
 
-int main()
+// Global variables
+const int width = 800;
+const int height = 600;
+const float blockSize = 20;
+/*
+void testingGrid(sf::RenderWindow &window)
 {
-    int width = 800;
-    int height = 600;
-    int blockSize = 10;
     Grid grid(sf::Vector2i(width, height), blockSize);
-
-    sf::RenderWindow window(sf::VideoMode(width, height), "Gridzzz");
-    window.setFramerateLimit(60);
     std::vector<GridBox *> rows, cols;
 
     rows = grid.getRows();
@@ -50,6 +50,79 @@ int main()
             }
         }
     }
+}
+*/
+int main()
+{
 
+    sf::RenderWindow window(sf::VideoMode(width, height), "Gridz");
+    window.setFramerateLimit(30);
+
+    const int gridRows = width / blockSize;
+    const int gridCols = height / blockSize;
+
+    //sf::RectangleShape rects[gridCols][gridRows];
+
+    std::vector<sf::RectangleShape> rectsRows;
+
+    window.clear();
+
+    float posX = 0, posY = 0;
+    for (size_t i = 0; i < gridCols; i++)
+    {
+        for (size_t j = 0; j < gridRows; j++)
+        {
+            sf::RectangleShape rect(sf::Vector2f(blockSize, blockSize));
+            rect.setFillColor(sf::Color::White);
+            rect.setOutlineColor(sf::Color::Black);
+            rect.setOutlineThickness(1.5f);
+            rect.setPosition(posX, posY);
+
+            window.draw(rect);
+            posX += blockSize;
+        }
+        posY += blockSize;
+        posX = 0;
+
+    }
+    window.display();
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            {
+                window.close();
+            }
+        }
+        /*
+                float posX = 0, posY = 0;
+
+                window.clear();
+                for (size_t i = 0; i < gridRows; i++)
+                {
+                    for (size_t j = 0; j < gridCols; j++)
+                    {
+                        sf::RectangleShape rect;
+                        rect.setFillColor(sf::Color::Yellow);
+                        rect.setPosition(posX, posY);
+                        posX += blockSize;
+                        posY += blockSize;
+                        //rect.setOutlineColor(sf::Color::Black);
+                        //rect.setOutlineThickness(0.6f);
+                        window.draw(rect);
+                    }
+
+                }
+        */
+
+
+
+
+    }
+    std::cout << "END" << std::endl;
     return 0;
 }

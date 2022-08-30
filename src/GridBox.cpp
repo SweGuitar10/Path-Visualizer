@@ -2,18 +2,23 @@
 
 GridBox::GridBox(sf::Vector2f size)
 {
-    _size = size;
-    _color = sf::Color::Black;
-    _position = sf::Vector2f(0, 0);
 
-    _rectangle = sf::RectangleShape(_size);
-    _rectangle.setFillColor(_color);
-    _rectangle.setOutlineColor(sf::Color::Black);
-    _rectangle.setOutlineThickness(5.0f);
+    _rectangle = new sf::RectangleShape(size);
+    _rectangle->setFillColor(sf::Color::Red);
+    _rectangle->setOutlineColor(sf::Color::Black);
+    _rectangle->setOutlineThickness(2.0f);
 }
 
+GridBox::GridBox(int size)
+{
+    GridBox(sf::Vector2f(size, size));
+}
+
+GridBox::GridBox()
+{
+    GridBox(sf::Vector2f(1, 1));
+}
 
 GridBox::~GridBox()
 {
 }
-
