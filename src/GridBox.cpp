@@ -3,10 +3,10 @@
 GridBox::GridBox(sf::Vector2f size)
 {
 
-    _rectangle = new sf::RectangleShape(size);
-    _rectangle->setFillColor(sf::Color::Red);
-    _rectangle->setOutlineColor(sf::Color::Black);
-    _rectangle->setOutlineThickness(2.0f);
+    _rectangle = sf::RectangleShape(size);
+    _rectangle.setFillColor(sf::Color::Red);
+    _rectangle.setOutlineColor(sf::Color::Black);
+    _rectangle.setOutlineThickness(2.0f);
 }
 
 GridBox::GridBox(int size)
