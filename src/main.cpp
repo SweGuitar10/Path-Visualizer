@@ -53,28 +53,7 @@ int main()
 	// Window
 	sf::RenderWindow window(sf::VideoMode(width, height), "Grid");
 	window.setFramerateLimit(30);
-
-
-	// Set up grdiboxes
-	std::vector<std::vector<GridBox>> gridBoxCols;
-	float posX = 0, posY = 0;
-
-	for (size_t i = 0; i < gridCols; i++)
-	{
-		std::vector<GridBox> gridBoxRows;
-
-		for (size_t j = 0; j < gridRows; j++)
-		{
-			GridBox box(sf::Vector2f(blockSize, blockSize));
-			box.setColor(sf::Color::White);
-			box.setPosition(sf::Vector2f(posX, posY));
-			gridBoxRows.push_back(box);
-			posX += blockSize;
-		}
-		posY += blockSize;
-		posX = 0;
-		gridBoxCols.push_back(gridBoxRows);
-	}
+	Grid grid(sf::Vector2i(width, height), blockSize);
 
 	while (window.isOpen())
 	{
@@ -94,18 +73,18 @@ int main()
 				{
 					for (size_t j = 0; j < gridRows; j++)
 					{
-						sf::Vector2f rectPos = gridBoxCols[i][j].getPosition();
+						sf::Vector2f rectPos = grid.getGridBoxCols()[i][j].getPosition();
 
 						if (mousePos.x <= rectPos.x + blockSize && mousePos.x >= rectPos.x
 							&& mousePos.y <= rectPos.y + blockSize && mousePos.y >= rectPos.y)
 						{
-							if (gridBoxCols[i][j].getColor() == sf::Color::Green)
+							if (grid.getGridBoxCols()[i][j].getColor() == sf::Color::Green)
 							{
-								gridBoxCols[i][j].setColor(sf::Color::White);
+								grid.setGridBoxColor(rectPos, sf::Color::White);
 							}
 							else
 							{
-								gridBoxCols[i][j].setColor(sf::Color::Green);
+								grid.setGridBoxColor(rectPos, sf::Color::Green);
 							}
 							i = gridCols;
 							j = gridRows;
@@ -116,14 +95,7 @@ int main()
 		}
 
 		window.clear();
-
-		for (size_t i = 0; i < gridCols; i++)
-		{
-			for (size_t j = 0; j < gridRows; j++)
-			{
-				window.draw(gridBoxCols[i][j].getRectangleShape());
-			}
-		}
+		grid.placeGrid(window);
 		window.display();
 	}
 	return 0;

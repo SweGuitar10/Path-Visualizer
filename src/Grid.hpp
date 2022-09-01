@@ -8,22 +8,18 @@ public:
 	Grid(sf::Vector2i size, int gridSize);
 	~Grid();
 
-	inline std::vector<GridBox *> getRows()
+	inline std::vector<std::vector<GridBox>> getGridBoxCols()
 	{
-		return _rows;
+		return gridBoxCols;
 	};
 
-	inline std::vector<GridBox *> getColumns()
-	{
-		return _columns;
-	};
-
+	void placeGrid(sf::RenderWindow& window);
+	void setGridBoxColor(sf::Vector2f pos, sf::Color color);
 private:
-	std::vector<GridBox *> _rows;
-	std::vector<GridBox *> _columns;
+
 	sf::Vector2i _gridSize;
 	int _blockSize;
-
-	void calculateBlockSize();
-	void placeGrid();
+	int rowSize;
+	int colSize;
+	std::vector<std::vector<GridBox>> gridBoxCols;
 };

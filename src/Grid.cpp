@@ -2,41 +2,58 @@
 
 Grid::Grid(sf::Vector2i gridSize, int blockSize)
 {
-	int rowSize = gridSize.x / blockSize;
-	int colSize = gridSize.y / blockSize;
+	rowSize = gridSize.x / blockSize;
+	colSize = gridSize.y / blockSize;
 
 	_gridSize = gridSize;
 	_blockSize = blockSize;
 
-	for (size_t i = 0; i < rowSize; i++)
-	{
-		_rows.push_back(new GridBox(sf::Vector2f(_blockSize, _blockSize)));
-	}
+	float posX = 0, posY = 0;
 
 	for (size_t i = 0; i < colSize; i++)
 	{
-		_columns.push_back(new GridBox(sf::Vector2f(_blockSize, _blockSize)));
+		std::vector<GridBox> gridBoxRows;
+
+		for (size_t j = 0; j < rowSize; j++)
+		{
+			GridBox box(sf::Vector2f(blockSize, blockSize));
+			box.setColor(sf::Color::White);
+			box.setPosition(sf::Vector2f(posX, posY));
+			gridBoxRows.push_back(box);
+			posX += blockSize;
+		}
+		posY += blockSize;
+		posX = 0;
+		gridBoxCols.push_back(gridBoxRows);
 	}
 }
 
 Grid::~Grid()
 {
-	for (size_t i = 0; i < _rows.size(); i++)
-	{
-		delete _rows[i];
-	}
-	
-	for (size_t i = 0; i < _columns.size(); i++)
-	{
-		delete _columns[i];
-	}
-	
+
 }
 
-void Grid::placeGrid()
+void Grid::placeGrid(sf::RenderWindow& window)
 {
+	for (size_t i = 0; i < colSize; i++)
+	{
+		for (size_t j = 0; j < rowSize; j++)
+		{
+			window.draw(gridBoxCols[i][j].getRectangleShape());
+		}
+	}
 }
 
-void Grid::calculateBlockSize()
+void Grid::setGridBoxColor(sf::Vector2f pos, sf::Color color)
 {
+	for (size_t i = 0; i < colSize; i++)
+	{
+		for (size_t j = 0; j < rowSize; j++)
+		{
+			if(gridBoxCols[i][j].getPosition() == pos)
+			{
+				gridBoxCols[i][j].setColor(color);
+			}
+		}
+	}
 }
