@@ -6,17 +6,13 @@
 // Global variables
 const int width = 800;
 const int height = 600;
-const float blockSize = 20;
+const float blockSize = 50;
 
-int main()
+const int gridRows = width / blockSize;
+const int gridCols = height / blockSize;
+
+void testWithRectShapeInit()
 {
-
-	sf::RenderWindow window(sf::VideoMode(width, height), "Grid");
-	window.setFramerateLimit(30);
-
-	const int gridRows = width / blockSize;
-	const int gridCols = height / blockSize;
-
 	std::vector<std::vector<sf::RectangleShape>> rectsCols;
 	float posX = 0, posY = 0;
 
@@ -32,13 +28,52 @@ int main()
 			rect.setOutlineThickness(1.5f);
 			rect.setPosition(posX, posY);
 			rectsRows.push_back(rect);
-			window.draw(rect);
 			posX += blockSize;
 		}
 		posY += blockSize;
 		posX = 0;
 		rectsCols.push_back(rectsRows);
 
+	}
+}
+
+void testWithRectShapeDraw(sf::RenderWindow& window, std::vector<std::vector<sf::RectangleShape>> rectsCols)
+{
+	for (size_t i = 0; i < gridCols; i++)
+	{
+		for (size_t j = 0; j < gridRows; j++)
+		{
+			window.draw(rectsCols[i][j]);
+		}
+	}
+}
+
+int main()
+{
+	// Window
+	sf::RenderWindow window(sf::VideoMode(width, height), "Grid");
+	window.setFramerateLimit(30);
+
+
+	// Set up grdiboxes
+	std::vector<std::vector<GridBox>> gridBoxCols;
+	float posX = 0, posY = 0;
+
+	for (size_t i = 0; i < gridCols; i++)
+	{
+		std::vector<GridBox> gridBoxRows;
+
+		for (size_t j = 0; j < gridRows; j++)
+		{
+			GridBox box(sf::Vector2f(blockSize, blockSize));
+			box.setColor(sf::Color::White);
+			box.setPosition(sf::Vector2f(posX, posY));
+			gridBoxRows.push_back(box);
+			posX += blockSize;
+		}
+		posY += blockSize;
+		posX = 0;
+		gridBoxCols.push_back(gridBoxRows);
 	}
 
 	while (window.isOpen())
@@ -59,24 +94,21 @@ int main()
 				{
 					for (size_t j = 0; j < gridRows; j++)
 					{
-						sf::RectangleShape rect = rectsCols[i][j];
-						sf::Vector2f rectPos = rect.getPosition();
+						sf::Vector2f rectPos = gridBoxCols[i][j].getPosition();
 
 						if (mousePos.x <= rectPos.x + blockSize && mousePos.x >= rectPos.x
 							&& mousePos.y <= rectPos.y + blockSize && mousePos.y >= rectPos.y)
 						{
-							if (rect.getFillColor() == sf::Color::Green)
+							if (gridBoxCols[i][j].getColor() == sf::Color::Green)
 							{
-								rect.setFillColor(sf::Color::White);
+								gridBoxCols[i][j].setColor(sf::Color::White);
 							}
 							else
 							{
-								rect.setFillColor(sf::Color::Green);
+								gridBoxCols[i][j].setColor(sf::Color::Green);
 							}
-							rectsCols[i][j] = rect;
 							i = gridCols;
 							j = gridRows;
-
 						}
 					}
 				}
@@ -89,7 +121,7 @@ int main()
 		{
 			for (size_t j = 0; j < gridRows; j++)
 			{
-				window.draw(rectsCols[i][j]);
+				window.draw(gridBoxCols[i][j].getRectangleShape());
 			}
 		}
 		window.display();
