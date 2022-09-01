@@ -3,8 +3,8 @@
 class GridDrawer
 {
 public:
-    GridDrawer();
-    ~GridDrawer();
+	GridDrawer();
+	~GridDrawer();
 
 private:
 
