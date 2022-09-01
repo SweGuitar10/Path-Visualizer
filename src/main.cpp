@@ -11,43 +11,6 @@ const float blockSize = 50;
 const int gridRows = width / blockSize;
 const int gridCols = height / blockSize;
 
-void testWithRectShapeInit()
-{
-	std::vector<std::vector<sf::RectangleShape>> rectsCols;
-	float posX = 0, posY = 0;
-
-	for (size_t i = 0; i < gridCols; i++)
-	{
-		std::vector<sf::RectangleShape> rectsRows;
-
-		for (size_t j = 0; j < gridRows; j++)
-		{
-			sf::RectangleShape rect(sf::Vector2f(blockSize, blockSize));
-			rect.setFillColor(sf::Color::White);
-			rect.setOutlineColor(sf::Color::Black);
-			rect.setOutlineThickness(1.5f);
-			rect.setPosition(posX, posY);
-			rectsRows.push_back(rect);
-			posX += blockSize;
-		}
-		posY += blockSize;
-		posX = 0;
-		rectsCols.push_back(rectsRows);
-
-	}
-}
-
-void testWithRectShapeDraw(sf::RenderWindow& window, std::vector<std::vector<sf::RectangleShape>> rectsCols)
-{
-	for (size_t i = 0; i < gridCols; i++)
-	{
-		for (size_t j = 0; j < gridRows; j++)
-		{
-			window.draw(rectsCols[i][j]);
-		}
-	}
-}
-
 int main()
 {
 	// Window
