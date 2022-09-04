@@ -13,6 +13,7 @@ public:
 		return gridBoxCols;
 	};
 	GridBox getNullBox() { return _nullBox; }
+	bool isNullBox(GridBox& box) { return _nullBox == box; }
 
 	void placeGrid(sf::RenderWindow& window);
 	void setGridBoxColor(sf::Vector2f pos, sf::Color color);

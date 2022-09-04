@@ -10,7 +10,8 @@ public:
 		Empty,
 		Start,
 		End,
-		Obstacle
+		Obstacle,
+		Null
 	};
 
 	GridBox();
@@ -29,8 +30,12 @@ public:
 	sf::RectangleShape getRectangleShape() { return _rectangle; }
 	GridType getType() { return _gridType; }
 
+	const bool operator== (const GridBox& box);
+	const bool operator!= (const GridBox& box);
+
 private:
 	sf::RectangleShape _rectangle;
 	sf::Vector2f _position;
+	sf::Vector2f _size;
 	GridType _gridType;
 };

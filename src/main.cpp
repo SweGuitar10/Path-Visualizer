@@ -46,31 +46,7 @@ int main()
 						GridBoxBehaviour::setEmpty(box);
 					}
 				}
-				/*
-				for (size_t i = 0; i < gridCols; i++)
-				{
-					for (size_t j = 0; j < gridRows; j++)
-					{
-						sf::Vector2f rectPos = grid.getGridBoxCols()[i][j].getPosition();
-
-						if (mousePos.x <= rectPos.x + blockSize && mousePos.x >= rectPos.x
-							&& mousePos.y <= rectPos.y + blockSize && mousePos.y >= rectPos.y)
-						{
-							GridBox& box = grid.getGridBox(rectPos);
-
-							if (box.getType() != GridBox::GridType::Empty)
-							{
-								box.setColor(sf::Color::White);
-							}
-							else
-							{
-								box.setColor(sf::Color::Green);
-							}
-							i = gridCols;
-							j = gridRows;
-						}
-					}
-				}*/
+				
 			}
 		}
 
