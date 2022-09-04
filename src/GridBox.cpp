@@ -23,6 +23,12 @@ GridBox::GridBox()
 	GridBox(sf::Vector2f(1, 1));
 }
 
+GridBox::GridBox(int size, GridType type)
+{
+	GridBox(sf::Vector2f(size, size));
+	_gridType = type;
+}
+
 GridBox::~GridBox()
 {
 }

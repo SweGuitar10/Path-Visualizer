@@ -27,9 +27,7 @@ Grid::Grid(sf::Vector2i gridSize, int blockSize)
 		gridBoxCols.push_back(gridBoxRows);
 	}
 
-	_nullBox = GridBox(-1);
-	_nullBox.setPosition(sf::Vector2f(-1, -1));
-	_nullBox.setGridType(GridBox::GridType::Null);
+	_nullBox = GridBox(-1, GridBox::GridType::Null);
 }
 
 Grid::~Grid()

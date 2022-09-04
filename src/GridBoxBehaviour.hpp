@@ -8,11 +8,14 @@ public:
     GridBoxBehaviour();
     ~GridBoxBehaviour();
 
-    static void setObstacle(GridBox& box);
-    static void setStart(GridBox& box);
-    static void setEnd(GridBox& box);
-    static void setEmpty(GridBox& box);
+    void setObstacle(GridBox& box);
+    void setStart(GridBox& box);
+    void setEnd(GridBox& box);
+    void setEmpty(GridBox& box);
 
 private:
-
+    GridBox* _boxStart;
+    GridBox* _boxEnd;
+    GridBox _nullBox;
+    //GridBoxBehaviour() {}
 };

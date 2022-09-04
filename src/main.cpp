@@ -2,6 +2,7 @@
 #include "Grid.hpp"
 #include "GridBox.hpp"
 #include "GridBoxBehaviour.hpp"
+#include "GridInput.hpp"
 #include <iostream>
 
 // Global variables
@@ -19,6 +20,7 @@ int main()
 	window.setFramerateLimit(30);
 
 	Grid grid(sf::Vector2i(width, height), blockSize);
+	GridBoxBehaviour boxBehaviour;
 
 	while (window.isOpen())
 	{
@@ -39,11 +41,22 @@ int main()
 				{
 					if (box.getType() == GridBox::GridType::Empty)
 					{
-						GridBoxBehaviour::setStart(box);
+						if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+						{
+							boxBehaviour.setStart(box);
+						}
+						else if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+						{
+							boxBehaviour.setEnd(box);
+						}
+						else if(sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+						{
+							boxBehaviour.setObstacle(box);
+						}
 					}
 					else
 					{
-						GridBoxBehaviour::setEmpty(box);
+						boxBehaviour.setEmpty(box);
 					}
 				}
 				

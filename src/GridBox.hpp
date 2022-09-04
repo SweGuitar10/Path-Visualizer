@@ -15,6 +15,7 @@ public:
 	};
 
 	GridBox();
+	GridBox(int size, GridType type);
 	GridBox(sf::Vector2f size);
 	GridBox(int size);
 	~GridBox();
