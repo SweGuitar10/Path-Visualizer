@@ -35,7 +35,7 @@ int main()
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				GridBox& box = grid.getGridBox(sf::Vector2f(mousePos.x, mousePos.y));
 
-				if (box.getPosition() != grid.getNullBox().getPosition())
+				if (!grid.isNullBox(box))
 				{
 					if (box.getType() == GridBox::GridType::Empty)
 					{
