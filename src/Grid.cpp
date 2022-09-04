@@ -26,6 +26,9 @@ Grid::Grid(sf::Vector2i gridSize, int blockSize)
 		posX = 0;
 		gridBoxCols.push_back(gridBoxRows);
 	}
+
+	_nullBox = GridBox(-1);
+	_nullBox.setPosition(sf::Vector2f(-1, -1));
 }
 
 Grid::~Grid()
@@ -50,10 +53,29 @@ void Grid::setGridBoxColor(sf::Vector2f pos, sf::Color color)
 	{
 		for (size_t j = 0; j < rowSize; j++)
 		{
-			if(gridBoxCols[i][j].getPosition() == pos)
+			if (gridBoxCols[i][j].getPosition() == pos)
 			{
 				gridBoxCols[i][j].setColor(color);
 			}
 		}
 	}
+}
+
+GridBox& Grid::getGridBox(sf::Vector2f pos)
+{
+	for (size_t i = 0; i < colSize; i++)
+	{
+
+		for (size_t j = 0; j < rowSize; j++)
+		{
+			sf::Vector2f rectPos = gridBoxCols[i][j].getPosition();
+
+			if (pos.x <= rectPos.x + _blockSize && pos.x >= rectPos.x
+				&& pos.y <= rectPos.y + _blockSize && pos.y >= rectPos.y)
+			{
+				return gridBoxCols[i][j];
+			}
+		}
+	}
+	return _nullBox;
 }

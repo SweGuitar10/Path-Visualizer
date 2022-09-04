@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Grid.hpp"
 #include "GridBox.hpp"
+#include "GridBoxBehaviour.hpp"
 #include <iostream>
 
 // Global variables
@@ -16,6 +17,7 @@ int main()
 	// Window
 	sf::RenderWindow window(sf::VideoMode(width, height), "Grid");
 	window.setFramerateLimit(30);
+
 	Grid grid(sf::Vector2i(width, height), blockSize);
 
 	while (window.isOpen())
@@ -31,7 +33,20 @@ int main()
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+				GridBox& box = grid.getGridBox(sf::Vector2f(mousePos.x, mousePos.y));
 
+				if (box.getPosition() != grid.getNullBox().getPosition())
+				{
+					if (box.getType() == GridBox::GridType::Empty)
+					{
+						GridBoxBehaviour::setStart(box);
+					}
+					else
+					{
+						GridBoxBehaviour::setEmpty(box);
+					}
+				}
+				/*
 				for (size_t i = 0; i < gridCols; i++)
 				{
 					for (size_t j = 0; j < gridRows; j++)
@@ -41,19 +56,21 @@ int main()
 						if (mousePos.x <= rectPos.x + blockSize && mousePos.x >= rectPos.x
 							&& mousePos.y <= rectPos.y + blockSize && mousePos.y >= rectPos.y)
 						{
-							if (grid.getGridBoxCols()[i][j].getColor() == sf::Color::Green)
+							GridBox& box = grid.getGridBox(rectPos);
+
+							if (box.getType() != GridBox::GridType::Empty)
 							{
-								grid.setGridBoxColor(rectPos, sf::Color::White);
+								box.setColor(sf::Color::White);
 							}
 							else
 							{
-								grid.setGridBoxColor(rectPos, sf::Color::Green);
+								box.setColor(sf::Color::Green);
 							}
 							i = gridCols;
 							j = gridRows;
 						}
 					}
-				}
+				}*/
 			}
 		}
 

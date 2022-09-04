@@ -7,6 +7,8 @@ GridBox::GridBox(sf::Vector2f size)
 	_rectangle.setFillColor(sf::Color::White);
 	_rectangle.setOutlineColor(sf::Color::Black);
 	_rectangle.setOutlineThickness(1.5f);
+
+	_gridType = Empty;
 }
 
 
@@ -36,4 +38,9 @@ void GridBox::setColor(sf::Color color)
 void GridBox::setSize(sf::Vector2f size)
 {
 	_rectangle.setSize(size);
+}
+
+void GridBox::setGridType(GridType type)
+{
+	_gridType = type;
 }

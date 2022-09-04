@@ -13,6 +13,8 @@ src/Grid.cpp
 src/Grid.hpp
 src/GridBox.cpp
 src/GridBox.hpp
+src/GridBoxBehaviour.hpp
+src/GridBoxBehaviour.cpp
 )
 target_link_libraries(PathVisualizer PRIVATE sfml-graphics)
 target_compile_features(PathVisualizer PRIVATE cxx_std_17)

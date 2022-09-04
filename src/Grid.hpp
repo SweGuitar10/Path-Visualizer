@@ -12,9 +12,12 @@ public:
 	{
 		return gridBoxCols;
 	};
+	GridBox getNullBox() { return _nullBox; }
 
 	void placeGrid(sf::RenderWindow& window);
 	void setGridBoxColor(sf::Vector2f pos, sf::Color color);
+	GridBox& getGridBox(sf::Vector2f pos);
+
 private:
 
 	sf::Vector2i _gridSize;
@@ -22,4 +25,5 @@ private:
 	int rowSize;
 	int colSize;
 	std::vector<std::vector<GridBox>> gridBoxCols;
+	GridBox _nullBox;
 };
