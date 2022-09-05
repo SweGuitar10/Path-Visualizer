@@ -18,6 +18,8 @@ public:
 	void placeGrid(sf::RenderWindow& window);
 	void setGridBoxColor(sf::Vector2f pos, sf::Color color);
 	GridBox& getGridBox(sf::Vector2f pos);
+	GridBox& getStart();
+	GridBox& getEnd();
 
 private:
 
@@ -27,4 +29,6 @@ private:
 	int colSize;
 	std::vector<std::vector<GridBox>> gridBoxCols;
 	GridBox _nullBox;
+	
+	GridBox& findBoxByType(GridBox::GridType type);
 };

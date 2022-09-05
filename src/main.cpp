@@ -20,7 +20,6 @@ int main()
 	window.setFramerateLimit(30);
 
 	Grid grid(sf::Vector2i(width, height), blockSize);
-	//GridBoxBehaviour boxBehaviour;
 	GridInput input;
 
 	while (window.isOpen())
@@ -41,29 +40,20 @@ int main()
 				if (!grid.isNullBox(box))
 				{
 					input.handleMouseInput(box);
-					/*
-					if (box.getType() == GridBox::GridType::Empty)
-					{
-						if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-						{
-							boxBehaviour.setStart(box);
-						}
-						else if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-						{
-							boxBehaviour.setEnd(box);
-						}
-						else if(sf::Mouse::isButtonPressed(sf::Mouse::Middle))
-						{
-							boxBehaviour.setObstacle(box);
-						}
-					}
-					else
-					{
-						boxBehaviour.setEmpty(box);
-					}
-					*/
 				}
-				
+
+			}
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+				{
+					GridBox start, end;
+					start = grid.getStart();
+					end = grid.getEnd();
+
+					std::cout << "Start:\t" << "x: " << start.getPosition().x << "\ty: " << start.getPosition().y << std::endl;
+					std::cout << "End:\t" << "x: " << end.getPosition().x << "\ty: " << end.getPosition().y << std::endl;
+				}
 			}
 		}
 

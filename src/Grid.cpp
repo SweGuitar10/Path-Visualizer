@@ -32,7 +32,6 @@ Grid::Grid(sf::Vector2i gridSize, int blockSize)
 
 Grid::~Grid()
 {
-
 }
 
 void Grid::placeGrid(sf::RenderWindow& window)
@@ -64,7 +63,6 @@ GridBox& Grid::getGridBox(sf::Vector2f pos)
 {
 	for (size_t i = 0; i < colSize; i++)
 	{
-
 		for (size_t j = 0; j < rowSize; j++)
 		{
 			sf::Vector2f rectPos = gridBoxCols[i][j].getPosition();
@@ -73,6 +71,33 @@ GridBox& Grid::getGridBox(sf::Vector2f pos)
 				&& pos.y <= rectPos.y + _blockSize && pos.y >= rectPos.y)
 			{
 				return gridBoxCols[i][j];
+			}
+		}
+	}
+	return _nullBox;
+}
+
+GridBox& Grid::getStart()
+{
+	return findBoxByType(GridBox::GridType::Start);
+
+}
+
+GridBox& Grid::getEnd()
+{
+	return findBoxByType(GridBox::GridType::End);
+}
+
+GridBox& Grid::findBoxByType(GridBox::GridType type)
+{
+	for (size_t i = 0; i < colSize; i++)
+	{
+		for (size_t j = 0; j < rowSize; j++)
+		{
+			GridBox& box = gridBoxCols[i][j];
+			if (type == box.getType())
+			{
+				return box;
 			}
 		}
 	}
