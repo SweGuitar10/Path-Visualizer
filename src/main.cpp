@@ -20,7 +20,8 @@ int main()
 	window.setFramerateLimit(30);
 
 	Grid grid(sf::Vector2i(width, height), blockSize);
-	GridBoxBehaviour boxBehaviour;
+	//GridBoxBehaviour boxBehaviour;
+	GridInput input;
 
 	while (window.isOpen())
 	{
@@ -39,6 +40,8 @@ int main()
 
 				if (!grid.isNullBox(box))
 				{
+					input.handleMouseInput(box);
+					/*
 					if (box.getType() == GridBox::GridType::Empty)
 					{
 						if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -58,6 +61,7 @@ int main()
 					{
 						boxBehaviour.setEmpty(box);
 					}
+					*/
 				}
 				
 			}

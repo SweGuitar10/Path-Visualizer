@@ -29,7 +29,8 @@ void GridBoxBehaviour::setStart(GridBox& box)
 
 void GridBoxBehaviour::setEnd(GridBox& box)
 {
-	if (_boxEnd->getSize() != sf::Vector2f(-1, -1))
+	if (_boxEnd->getType() != GridBox::GridType::Empty &&
+		_boxEnd->getType() != GridBox::GridType::Null)
 	{
 		setEmpty(*_boxEnd);
 	}
