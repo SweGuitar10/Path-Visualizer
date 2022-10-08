@@ -59,9 +59,8 @@ int main()
 					sf::Vector2f pathTemp = grid.getStart().getPosition();
 					sf::Vector2f diffTemp = grid.getDistance(start, end);
 					pathTemp = sf::Vector2f(pathTemp.x + blockSize, pathTemp.y + blockSize);
-					// while diffTemp is greater than end.pos
 					
-
+					// while diffTemp is greater than end.pos
 					while (pathTemp.x <= end.getPosition().x || pathTemp.y <= end.getPosition().y)
 					{
 						// 	paint next tile as setColorPath
