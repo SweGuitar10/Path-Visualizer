@@ -14,19 +14,19 @@ void GridInput::handleMouseInput(GridBox& box)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			_boxBehaviour.setStart(box);
+			_boxBehaviour.setColorStart(box);
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
-			_boxBehaviour.setEnd(box);
+			_boxBehaviour.seColorEnd(box);
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
 		{
-			_boxBehaviour.setObstacle(box);
+			_boxBehaviour.setColorObstacle(box);
 		}
 	}
 	else
 	{
-		_boxBehaviour.setEmpty(box);
+		_boxBehaviour.setColorEmpty(box);
 	}
 }

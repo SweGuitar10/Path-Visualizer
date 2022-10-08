@@ -8,10 +8,11 @@ public:
     GridBoxBehaviour();
     ~GridBoxBehaviour();
 
-    void setObstacle(GridBox& box);
-    void setStart(GridBox& box);
-    void setEnd(GridBox& box);
-    void setEmpty(GridBox& box);
+    void setColorObstacle(GridBox& box);
+    void setColorStart(GridBox& box);
+    void seColorEnd(GridBox& box);
+    void setColorEmpty(GridBox& box);
+    void setColorPath(GridBox& box);
 
 private:
     GridBox* _boxStart;

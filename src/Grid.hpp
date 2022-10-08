@@ -20,6 +20,7 @@ public:
 	GridBox& getGridBox(sf::Vector2f pos);
 	GridBox& getStart();
 	GridBox& getEnd();
+	sf::Vector2f getDistance(GridBox& box1, GridBox& box2);
 
 private:
 

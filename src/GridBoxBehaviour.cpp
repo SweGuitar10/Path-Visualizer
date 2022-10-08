@@ -9,37 +9,49 @@ GridBoxBehaviour::~GridBoxBehaviour()
 {
 }
 
-void GridBoxBehaviour::setObstacle(GridBox& box)
+void GridBoxBehaviour::setColorObstacle(GridBox& box)
 {
 	box.setColor(sf::Color::Black);
 	box.setGridType(GridBox::GridType::Obstacle);
 }
 
-void GridBoxBehaviour::setStart(GridBox& box)
+void GridBoxBehaviour::setColorStart(GridBox& box)
 {
 	if (_boxStart->getType() != GridBox::GridType::Empty &&
 		_boxStart->getType() != GridBox::GridType::Null)
 	{
-		setEmpty(*_boxStart);
+		setColorEmpty(*_boxStart);
 	}
 	_boxStart = &box;
 	box.setColor(sf::Color::Green);
 	box.setGridType(GridBox::GridType::Start);
 }
 
-void GridBoxBehaviour::setEnd(GridBox& box)
+void GridBoxBehaviour::seColorEnd(GridBox& box)
 {
 	if (_boxEnd->getType() != GridBox::GridType::Empty &&
 		_boxEnd->getType() != GridBox::GridType::Null)
 	{
-		setEmpty(*_boxEnd);
+		setColorEmpty(*_boxEnd);
 	}
 	box.setColor(sf::Color::Red);
 	box.setGridType(GridBox::GridType::End);
 	_boxEnd = &box;
 }
 
-void GridBoxBehaviour::setEmpty(GridBox& box)
+void GridBoxBehaviour::setColorPath(GridBox& box)
+{
+	if (_boxEnd->getType() != GridBox::GridType::Empty &&
+		_boxEnd->getType() != GridBox::GridType::Null)
+	{
+		setColorEmpty(*_boxEnd);
+	}
+	box.setColor(sf::Color::Blue);
+	box.setGridType(GridBox::GridType::End);
+	_boxEnd = &box;
+}
+
+void GridBoxBehaviour::setColorEmpty(GridBox& box)
 {
 	box.setColor(sf::Color::White);
 	box.setGridType(GridBox::GridType::Empty);

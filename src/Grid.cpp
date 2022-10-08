@@ -88,6 +88,10 @@ GridBox& Grid::getEnd()
 	return findBoxByType(GridBox::GridType::End);
 }
 
+sf::Vector2f Grid::getDistance(GridBox& box1, GridBox& box2){
+	return box2.getPosition() - box1.getPosition();
+}
+
 GridBox& Grid::findBoxByType(GridBox::GridType type)
 {
 	for (size_t i = 0; i < colSize; i++)
