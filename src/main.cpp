@@ -58,15 +58,11 @@ int main()
 
 					sf::Vector2f pathTemp = grid.getStart().getPosition();
 					sf::Vector2f diffTemp = grid.getDistance(start, end);
-					pathTemp = sf::Vector2f(pathTemp.x + blockSize, pathTemp.y + blockSize);
 					
 					// while diffTemp is greater than end.pos
 					while (pathTemp.x <= end.getPosition().x || pathTemp.y <= end.getPosition().y)
 					{
 						// 	paint next tile as setColorPath
-						GridBoxBehaviour gbb;
-						GridBox& boxTemp = grid.getGridBox(pathTemp); 
-						gbb.setColorPath(boxTemp);
 						float x = pathTemp.x;
 						if (pathTemp.x <= end.getPosition().x) {
 							x += blockSize;
@@ -76,7 +72,13 @@ int main()
 							y += blockSize;
 						}
 						pathTemp = sf::Vector2f(x, y);
-						std::cout << "pathTemp\nx:\t" << pathTemp.x << "y:\t" << pathTemp.y << std::endl;
+						std::cout << "pathTemp\nx:\t" << pathTemp.x << "\ty:\t" << pathTemp.y << std::endl;
+
+						if(pathTemp != start.getPosition() && pathTemp != end.getPosition()){
+							GridBoxBehaviour gbb;
+							GridBox& boxTemp = grid.getGridBox(pathTemp); 
+							gbb.setColorPath(boxTemp);
+						}
 					}
 
 				}
